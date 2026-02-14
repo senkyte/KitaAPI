@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        html, body{
+            height: 100%;
+            margin: 0;
+            background-color: #fba7a7;
+            overflow:hidden;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+        #kitaImage{
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-color: #bb4840;
+            border-style: solid;
+            border-width: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <img id="kitaImage" src="https://cdn.donmai.us/sample/21/0a/__kita_ikuyo_bocchi_the_rock_drawn_by_mayo_oekaki_bibbi__sample-210a8bcd36793527dfd2e2202abe2605.jpg">
+    </div>
+    <a id="kitaSource" href="adasdsadas">Source: </a>
+    <script>
+        let kitaImage = document.getElementById("kitaImage");
+        let url = "https://danbooru.donmai.us/posts.json?tags=kita_ikuyo+rating:safe&limit=1&random=true";
+        let kitaSource = document.getElementById("kitaSource");
+        function changeKitaImage(){
+            fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                let variants = data[0].media_asset.variants;
+                let artist = data[0].tag_string_artist;
+                let newurl = variants[1].url;
+                let source = data[0].source;
+                kitaImage.src = newurl;
+                kitaSource.href = source;
+                kitaSource.innerText = `Artist: ${artist}`;
+            });
+        }
+
+        changeKitaImage();
+        window.addEventListener('message', event => {
+            const data = event.data;
+            if(data.lines % 10 === 0){
+                changeKitaImage();
+            }
+        });
+    </script>
+</body>
+</html>
