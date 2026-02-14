@@ -10,6 +10,10 @@ KitaAPI is a simple VSCode extension that fetches random Kita fanart from Safebo
 It refreshes to a new random image for every 10 lines of code written.
 
 
+## Installation
+
+Do you want to install it? Probably not. Do I want to publish it? ehhhhhhhhhhh
+
 
 ## Extension Settings
 
